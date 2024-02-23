@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name ="content">
+        <div class = "grid-container-login">
+
+            <p:graphicImage name="photos/mainPageContainer/background.jpg" alt="HOUMOU"/>
+            <img src="photos/mainPageContainer/background.jpg" alt="Vine"/>
+
+            <!--<div class="card">
+                    <h5>Inside Content</h5>
+                <p:galleria value="#{resourcePhoto}" var="photoVar"
+                            numVisible="5" responsiveOptions="#{photoController.responsiveOptions1}"
+                            showThumbnails="false" showIndicators="true"
+                            changeItemOnIndicatorHover="true" showIndicatorsOnItem="true"
+                            style="max-width: 640px">
+                    <p:graphicImage name="#{photoVar.itemImageSrc}" alt="#{photoVar.alt}"
+                                    style="width: 100%; display: block;" />
+                </p:galleria>
+                </div>
+            -->
+            <h:form id="form">
+                <p:datePicker id="inline" value="#{CalenderController.date}" inline="true" />
+                <p:commandButton value="Submit" action="#{CalenderController.click}" icon="pi pi-check" />
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
