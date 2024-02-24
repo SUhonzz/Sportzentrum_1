@@ -4,10 +4,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
                 template="/WEB-INF/templates/main.xhtml">
+
     <ui:define name ="content">
         <div class = "grid-container-login">
-
             <p:graphicImage name="photos/mainPageContainer/background.jpg" alt="HOUMOU"/>
             <img src="photos/mainPageContainer/background.jpg" alt="Vine"/>
 
@@ -24,8 +25,115 @@
                 </div>
             -->
             <h:form id="form">
-                <p:datePicker id="inline" value="#{CalenderController.date}" inline="true" />
-                <p:commandButton value="Submit" action="#{CalenderController.click}" icon="pi pi-check" />
+                <p:datePicker id="inline" value="#{calenderController.date}" inline="true" >
+                    <p:ajax event="dateSelect" listener="#{calenderController.updateDate}" update="timesID"/>
+                </p:datePicker>
+
+
+                <!--<pe:timePicker value="#{calenderController.time}" mode="inline" widgetVar="inlineTimeWidget" showMinutes="false" label="Inline time picker">
+                    <p:ajax event="timeSelect" listener="#{calenderController.updateTime}" />
+                </pe:timePicker>
+                -->
+                <p:dialog id="timesID" modal="true" resizable="false" visible="#{modularDialogController.dialogTime}" header="Values" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                    <p:panelGrid id="times" columns="3">
+                        <p:commandButton type="submit" value="07:00 - 08:00" class="#{calenderController.time07_08 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime07_08}"/>
+                        <p:commandButton type="submit" value="08:00 - 09:00" class="#{calenderController.time08_09 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime08_09}"/>
+                        <p:commandButton type="submit" value="09:00 - 10:00" class="#{calenderController.time09_10 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime09_10}"/>
+                        <p:commandButton type="submit" value="10:00 - 11:00" class="#{calenderController.time10_11 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime10_11}"/>
+                        <p:commandButton type="submit" value="11:00 - 12:00" class="#{calenderController.time11_12 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime11_12}"/>
+                        <p:commandButton type="submit" value="12:00 - 13:00" class="#{calenderController.time12_13 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime12_13}"/>
+                        <p:commandButton type="submit" value="13:00 - 14:00" class="#{calenderController.time13_14 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime13_14}"/>
+                        <p:commandButton type="submit" value="14:00 - 15:00" class="#{calenderController.time14_15 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime14_15}"/>
+                        <p:commandButton type="submit" value="15:00 - 16:00" class="#{calenderController.time15_16 ? '' : 'no'}" ajax="true" update="timesID, courtsID" actionListener="#{calenderController.manipulateTime15_16}"/>
+                    </p:panelGrid>
+                    <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToMainPage}" update="timesID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </p:dialog>
+
+                <p:dialog id="courtsID" modal="true" resizable="false" visible="#{modularDialogController.dialogCourts}" header="Plätze" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                    <p:panelGrid id="courts" columns="4">
+                        <p:card style="width: 25em">
+                            <f:facet name="header">
+                                <img alt="user header" src="img/tennisbat.png"/>
+                            </f:facet>
+                            <f:facet name="title">
+                                Tennis Platz 1
+                            </f:facet>
+                            <f:facet name="subtitle">
+                                Oben
+                            </f:facet>
+
+                            <f:facet name="footer">
+                                <p:commandButton type="submit" icon="pi pi-check" value="Registieren" actionListener="#{calenderController.pickCourt1}" update="courtsID, confirmID" class="#{calenderController.court1 ? '' : 'no'}"/>
+                                <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToTimes}" update="timesID, courtsID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                            </f:facet>
+                        </p:card>
+                        <p:card style="width: 25em">
+                            <f:facet name="header">
+                                <img alt="user header" src="img/tennisbat.png"/>
+                            </f:facet>
+                            <f:facet name="title">
+                                Tennis Platz 2
+                            </f:facet>
+                            <f:facet name="subtitle">
+                                Unten
+                            </f:facet>
+
+                            <f:facet name="footer">
+                                <p:commandButton type="submit" icon="pi pi-check" value="Registieren" actionListener="#{calenderController.pickCourt2}" update="courtsID, confirmID" class="#{calenderController.court2 ? '' : 'no'}"/>
+                                <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToTimes}" update="timesID, courtsID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                            </f:facet>
+                        </p:card>
+                        <p:card style="width: 25em">
+                            <f:facet name="header">
+                                <img alt="user header" src="img/tennisbat.png"/>
+                            </f:facet>
+                            <f:facet name="title">
+                                Tennis Platz 3
+                            </f:facet>
+                            <f:facet name="subtitle">
+                                Rechts
+                            </f:facet>
+
+                            <f:facet name="footer">
+                                <p:commandButton type="submit" icon="pi pi-check" value="Registieren" actionListener="#{calenderController.pickCourt3}" update="courtsID, confirmID" class="#{calenderController.court3 ? '' : 'no'}"/>
+                                <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToTimes}" update="timesID, courtsID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                            </f:facet>
+                        </p:card>
+                        <p:card style="width: 25em">
+                            <f:facet name="header">
+                                <img alt="user header" src="img/tennisbat.png"/>
+                            </f:facet>
+                            <f:facet name="title">
+                                Tennis Platz 4
+                            </f:facet>
+                            <f:facet name="subtitle">
+                                Links
+                            </f:facet>
+
+                            <f:facet name="footer">
+                                <p:commandButton type="submit" icon="pi pi-check" value="Registieren" actionListener="#{calenderController.pickCourt4}" update="courtsID, confirmID" class="#{calenderController.court4 ? '' : 'no'}"/>
+                                <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToTimes}" update="timesID, courtsID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                            </f:facet>
+                        </p:card>
+                    </p:panelGrid>
+                    <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToTimes}" update="timesID, courtsID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </p:dialog>
+
+                <p:dialog id="confirmID" modal="true" resizable="false" visible="#{modularDialogController.dialogConfirm}" header="Bestätigen" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+
+                        <div class="ui-inputgroup">
+                            <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                            <p:inputText placeholder="Mail"/>
+                            <p:commandButton type="submit" icon="pi pi-times" value="Senden" actionListener="#{calenderController.returnToCourts}" update="courtsID, confirmID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                        </div>
+                        <div class="ui-inputgroup">
+                            <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                            <p:inputText placeholder="Mail"/>
+                            <p:commandButton type="submit" icon="pi pi-times" value="Überprüfen" actionListener="#{calenderController.returnToCourts}" update="courtsID, confirmID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                        </div>
+                    <p:commandButton type="submit" icon="pi pi-times" value="Zurück" actionListener="#{calenderController.returnToCourts}" update="courtsID, confirmID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    <p:commandButton type="submit" icon="pi pi-times" value="Buchen" actionListener="#{calenderController.returnToCourts}" update="courtsID, confirmID" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </p:dialog>
             </h:form>
         </div>
     </ui:define>

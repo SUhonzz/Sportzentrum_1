@@ -74,7 +74,15 @@
             <groupId>org.joinfaces</groupId>
             <artifactId>primefaces-spring-boot-starter</artifactId>
         </dependency>
-        
+
+        <!-- to reduce boilerplate code -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
         <!-- special test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -91,6 +99,18 @@
             <artifactId>equalsverifier</artifactId>
             <version>3.11.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
