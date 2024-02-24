@@ -1,10 +1,14 @@
 package at.qe.skeleton.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.UUID;
 
-
+@Getter
+@Setter
 public class Photo implements Serializable {
 
     private String id;
